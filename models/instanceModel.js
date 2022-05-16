@@ -19,7 +19,7 @@ const instanceSchema = new mongoose.Schema({
     enum: ['text', 'snippet', 'embed', 'picture'],
   },
   content: { type: String, required: true, default: '' },
-  owner: mongoose.SchemaTypes.ObjectId,
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'Lane' },
 });
 
 //  Middleware

@@ -31,8 +31,8 @@ const engramSchema = new mongoose.Schema(
       },
     ],
     length: Number,
-    owner: mongoose.SchemaTypes.ObjectId,
-    children: [mongoose.SchemaTypes.ObjectId],
+    owner: { type: mongoose.Schema.Types.ObjectId, ref: 'Lane' },
+    children: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Instance' }],
   },
   {
     toJSON: { virtuals: true },

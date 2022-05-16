@@ -12,15 +12,15 @@ const errorHandler = require('./controllers/errorController');
 // Main app
 const app = express();
 
+// Middleware
+app.use(express.json({ limit: '10kb' }));
+app.use(express.static(`${__dirname}/public`));
+
 // Routers
 app.use('/users', userRouter);
 app.use('/lanes', laneRouter);
 app.use('/engrams', engramRouter);
 app.use('/instances', instanceRouter);
-
-// Middleware
-app.use(express.json({ limit: '10kb' }));
-app.use(express.static(`${__dirname}/public`));
 
 // Cant locate URL
 app.all('*', (req, res, next) => {

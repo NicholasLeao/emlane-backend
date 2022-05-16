@@ -33,8 +33,8 @@ const laneSchema = new mongoose.Schema(
       },
     ],
     length: Number,
-    owner: mongoose.SchemaTypes.ObjectId,
-    children: [mongoose.SchemaTypes.ObjectId],
+    owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    children: [{type: mongoose.Schema.Types.ObjectId, ref: 'Engram'}],
   },
   {
     toJSON: { virtuals: true },

@@ -9,7 +9,7 @@ const bcrypt = require('bcryptjs');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: [true, 'Please provide a name'],
   },
   email: {
     type: String,
@@ -40,6 +40,7 @@ const userSchema = new mongoose.Schema({
       message: 'Passwords are not the same!',
     },
   },
+  children: { type: mongoose.Schema.Types.ObjectId, ref: 'Lane' },
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpires: Date,

@@ -27,7 +27,7 @@ const createSendToken = (user, statusCode, res) => {
   };
   if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
-  res.cookie('jwt', token, cookieOptions);
+  res.cookie('emlane-jwt', token, cookieOptions);
 
   user.password = undefined;
 
@@ -44,6 +44,7 @@ const createSendToken = (user, statusCode, res) => {
 
 //  Signup handler
 exports.signup = catchAsync(async (req, res, next) => {
+  console.log('IM HERE 😃', req);
   // Create user
   const newUser = await User.create({
     name: req.body.name,
@@ -51,6 +52,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
+
   // Send token
   createSendToken(newUser, 201, res);
 });
@@ -72,6 +74,15 @@ exports.login = catchAsync(async (req, res, next) => {
   // Send token
   createSendToken(user, 200, res);
 });
+
+//  Logout
+exports.logout = (req, res) => {
+  res.cookie('emlane-jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({ status: 'success' });
+};
 
 // Protect route
 exports.protect = catchAsync(async (req, res, next) => {
