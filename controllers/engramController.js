@@ -85,7 +85,7 @@ exports.getChildren = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    data: engram.children,
+    engram,
   });
 });
 
@@ -109,6 +109,6 @@ exports.pushChildren = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    data: engram.children,
+    engram,
   });
 });

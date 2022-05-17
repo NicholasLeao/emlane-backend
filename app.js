@@ -1,5 +1,6 @@
 //  Imports
 const express = require('express');
+const cors = require('cors');
 
 const userRouter = require('./routes/userRoutes');
 const laneRouter = require('./routes/laneRoutes');
@@ -15,6 +16,23 @@ const app = express();
 // Middleware
 app.use(express.json({ limit: '10kb' }));
 app.use(express.static(`${__dirname}/public`));
+
+// Not working
+app.use(cors({ origin: process.env.REACT_APP_URL }));
+
+// Express cors workaround
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Methods',
+    'GET,HEAD,OPTIONS,POST,PUT,DELETE'
+  );
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  );
+  next();
+});
 
 // Routers
 app.use('/users', userRouter);
