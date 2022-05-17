@@ -16,5 +16,10 @@ router
   .patch(engramController.updateEngram)
   .delete(engramController.deleteEngram);
 
+router
+  .route('/children/:id')
+  .get(engramController.getChildren)
+  .post(engramController.pushChildren);
+
 // Exports
 module.exports = router;

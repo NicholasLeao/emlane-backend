@@ -31,7 +31,11 @@ const engramSchema = new mongoose.Schema(
       },
     ],
     length: Number,
-    owner: { type: mongoose.Schema.Types.ObjectId, ref: 'Lane' },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: [true, 'An engram must belong to a lane'],
+      ref: 'Lane',
+    },
     children: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Instance' }],
   },
   {
@@ -43,8 +47,11 @@ const engramSchema = new mongoose.Schema(
 //  Middleware
 engramSchema.pre('save', function (next) {
   this.length = this.children.length;
-  this.slug = slugify(this.title, { lower: true });
   this.modifiedAt = Date.now();
+  if (this.title) {
+    this.slug = slugify(this.title, { lower: true });
+  }
+
   next();
 });
 

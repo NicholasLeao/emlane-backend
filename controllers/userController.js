@@ -71,4 +71,39 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getChildren = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id).populate('children');
 
+  if (!user) {
+    return next(new AppError('Invalid ID', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: user.children,
+  });
+});
+
+exports.pushChildren = catchAsync(async (req, res, next) => {
+  if (!req.body.children) {
+    return next(new AppError('Invalid ObjectId', 404));
+  }
+
+  const user = await User.findByIdAndUpdate(
+    req.params.id,
+    { $push: { children: req.body.children } },
+    {
+      runValidators: true,
+      new: true,
+    }
+  );
+
+  if (!user) {
+    return next(new AppError('Invalid ID', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: { user },
+  });
+});

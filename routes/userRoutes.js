@@ -21,5 +21,6 @@ router
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
 
+router.route('/children/:id').get(userController.getChildren);
 // Exports
 module.exports = router;

@@ -71,3 +71,40 @@ exports.deleteLane = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
+
+exports.getChildren = catchAsync(async (req, res, next) => {
+  const lane = await Lane.findById(req.params.id).populate('children');
+
+  if (!lane) {
+    return next(new AppError('Invalid ID', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: lane.children,
+  });
+});
+
+exports.pushChildren = catchAsync(async (req, res, next) => {
+  if (!req.body.children) {
+    return next(new AppError('Invalid ObjectId', 404));
+  }
+
+  const lane = await Lane.findByIdAndUpdate(
+    req.params.id,
+    { $push: { children: req.body.children } },
+    {
+      runValidators: true,
+      new: true,
+    }
+  );
+
+  if (!lane) {
+    return next(new AppError('Invalid ID', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: { lane },
+  });
+});

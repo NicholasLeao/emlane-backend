@@ -14,11 +14,10 @@ const instanceSchema = new mongoose.Schema({
   active: { type: Boolean, default: true },
   type: {
     type: String,
-    required: [true, 'An instance must have a type'],
     default: 'text',
     enum: ['text', 'snippet', 'embed', 'picture'],
   },
-  content: { type: String, required: true, default: '' },
+  content: { type: String, default: '' },
   owner: { type: mongoose.Schema.Types.ObjectId, ref: 'Lane' },
 });
 
