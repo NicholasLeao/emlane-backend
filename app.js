@@ -14,7 +14,7 @@ const errorHandler = require('./controllers/errorController');
 const app = express();
 
 // Middleware
-app.use(express.json({ limit: '10kb' }));
+app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 
 // Not working
