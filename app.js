@@ -6,6 +6,9 @@ const userRouter = require('./routes/userRoutes');
 const laneRouter = require('./routes/laneRoutes');
 const engramRouter = require('./routes/engramRoutes');
 const instanceRouter = require('./routes/instanceRoutes');
+const uploadRouter = require('./routes/uploadimg.routes');
+
+require('dotenv').config();
 
 // Safety and error handler
 const errorHandler = require('./controllers/errorController');
@@ -25,7 +28,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Methods',
-    'GET,HEAD,OPTIONS,POST,PUT,DELETE'
+    'GET,HEAD,OPTIONS,POST,PUT,DELETE,PATCH'
   );
   res.header(
     'Access-Control-Allow-Headers',
@@ -39,6 +42,7 @@ app.use('/users', userRouter);
 app.use('/lanes', laneRouter);
 app.use('/engrams', engramRouter);
 app.use('/instances', instanceRouter);
+app.use('/', uploadRouter);
 
 // Cant locate URL
 app.all('*', (req, res, next) => {

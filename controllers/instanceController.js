@@ -42,6 +42,7 @@ exports.getInstance = catchAsync(async (req, res) => {
 });
 
 exports.updateInstance = catchAsync(async (req, res, next) => {
+  console.log("im in the backend 👽👽👽")
   const instance = await Instance.findByIdAndUpdate(req.params.id, req.body, {
     runValidators: true,
     new: true,
