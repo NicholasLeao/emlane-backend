@@ -15,8 +15,9 @@ const instanceSchema = new mongoose.Schema({
   type: {
     type: String,
     default: 'text',
-    enum: ['text', 'snippet', 'embed', 'picture'],
+    enum: ['text', 'snippet', 'embed', 'picture', 'mermaid'],
   },
+  asset: { type: String, default: '' },
   content: { type: String, default: '' },
   owner: { type: mongoose.Schema.Types.ObjectId, ref: 'Lane' },
 });
