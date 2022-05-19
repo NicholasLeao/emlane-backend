@@ -8,7 +8,7 @@ const engramRouter = require('./routes/engramRoutes');
 const instanceRouter = require('./routes/instanceRoutes');
 const uploadRouter = require('./routes/uploadimg.routes');
 
-require('dotenv').config();
+require('dotenv').config('./config.env');
 
 // Safety and error handler
 const errorHandler = require('./controllers/errorController');
@@ -21,8 +21,9 @@ app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 
 // Not working
-app.use(cors({ origin: process.env.REACT_APP_URL }));
-
+// app.use(cors({ origin: process.env.REACT_APP_URL }));
+app.use(cors({ origin: 'https://emlane.netlify.app' }));
+// console.log('😑REACTAPP', 'https://emlane.netlify.app');
 // Express cors workaround
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
