@@ -40,10 +40,10 @@ const userSchema = new mongoose.Schema({
       message: 'Passwords are not the same!',
     },
   },
-  children: { type: mongoose.Schema.Types.ObjectId, ref: 'Lane' },
-  passwordChangedAt: Date,
-  passwordResetToken: String,
-  passwordResetExpires: Date,
+  children: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Lane' }],
+  // passwordChangedAt: Date,
+  // passwordResetToken: String,
+  // passwordResetExpires: Date,
   active: { type: Boolean, default: true, select: false },
 });
 

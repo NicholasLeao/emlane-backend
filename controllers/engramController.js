@@ -85,14 +85,14 @@ exports.getChildren = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    engram,
+    children: engram.children,
   });
 });
 
 exports.pushChildren = catchAsync(async (req, res, next) => {
-  if (!req.body.children) {
-    return next(new AppError('Invalid ObjectId', 404));
-  }
+  // if (!req.body.children) {
+  //   return next(new AppError('Invalid ObjectId', 404));
+  // }
 
   const engram = await Engram.findByIdAndUpdate(
     req.params.id,

@@ -21,6 +21,9 @@ router
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
 
-router.route('/children/:id').get(userController.getChildren);
+router
+  .route('/children/:id')
+  .get(userController.getChildren)
+  .post(userController.pushChildren);
 // Exports
 module.exports = router;

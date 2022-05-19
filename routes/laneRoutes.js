@@ -16,7 +16,10 @@ router
   .patch(laneController.updateLane)
   .delete(laneController.deleteLane);
 
-router.route('/children/:id').get(laneController.getChildren);
+router
+  .route('/children/:id')
+  .get(laneController.getChildren)
+  .post(laneController.pushChildren);
 
 // Exports
 module.exports = router;
