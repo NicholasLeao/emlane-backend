@@ -23,6 +23,7 @@ app.use(express.static(`${__dirname}/public`));
 // Not working
 // app.use(cors({ origin: process.env.REACT_APP_URL }));
 app.use(cors({ origin: 'https://emlane.netlify.app' }));
+app.use(cors({ origin: 'http://localhost:3000/' }));
 // console.log('😑REACTAPP', 'https://emlane.netlify.app');
 // Express cors workaround
 app.use((req, res, next) => {
