@@ -89,6 +89,26 @@ exports.getChildren = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.deleteChildren = catchAsync(async (req, res, next) => {
+  const engram = await Engram.findByIdAndUpdate(
+    req.params.id,
+    { $pull: { children: req.body.children } },
+    {
+      runValidators: true,
+      new: true,
+    }
+  );
+
+  if (!engram) {
+    return next(new AppError('Invalid ID', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    engram,
+  });
+});
+
 exports.pushChildren = catchAsync(async (req, res, next) => {
   // if (!req.body.children) {
   //   return next(new AppError('Invalid ObjectId', 404));
