@@ -19,7 +19,8 @@ router
 router
   .route('/children/:id')
   .get(engramController.getChildren)
-  .post(engramController.pushChildren);
+  .post(engramController.pushChildren)
+  .delete(engramController.deleteChildren)
 
 // Exports
 module.exports = router;
